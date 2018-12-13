@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Fri Nov 30 14:53:48 2018
+# Generated: Sun Dec  2 12:07:20 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -60,6 +60,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.restoreGeometry(self.settings.value("geometry").toByteArray())
 
+
         ##################################################
         # Variables
         ##################################################
@@ -82,10 +83,10 @@ class top_block(gr.top_block, Qt.QWidget):
         self._uniselect_callback(self.uniselect)
         self._uniselect_combo_box.currentIndexChanged.connect(
         	lambda i: self.set_uniselect(self._uniselect_options[i]))
-        self.top_layout.addWidget(self._uniselect_tool_bar)
+        self.top_grid_layout.addWidget(self._uniselect_tool_bar)
         self._f_range = Range(0, 100000, 10, 1000, 200)
         self._f_win = RangeWidget(self._f_range, self.set_f, "f", "counter_slider", float)
-        self.top_layout.addWidget(self._f_win)
+        self.top_grid_layout.addWidget(self._f_win)
         self._unisigtype_options = (101, 103, )
         self._unisigtype_labels = ('Sine', 'Square', )
         self._unisigtype_tool_bar = Qt.QToolBar(self)
@@ -97,7 +98,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self._unisigtype_callback(self.unisigtype)
         self._unisigtype_combo_box.currentIndexChanged.connect(
         	lambda i: self.set_unisigtype(self._unisigtype_options[i]))
-        self.top_layout.addWidget(self._unisigtype_tool_bar)
+        self.top_grid_layout.addWidget(self._unisigtype_tool_bar)
         self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
         	1024, #size
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
@@ -140,7 +141,7 @@ class top_block(gr.top_block, Qt.QWidget):
             self.qtgui_freq_sink_x_0.set_line_alpha(i, alphas[i])
 
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_freq_sink_x_0_win)
+        self.top_grid_layout.addWidget(self._qtgui_freq_sink_x_0_win)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
         self.blks2_selector_0 = grc_blks2.selector(
@@ -152,6 +153,8 @@ class top_block(gr.top_block, Qt.QWidget):
         )
         self.audio_source_0 = audio.source(samp_rate, '', True)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_CONST_WAVE, f, 1, 0)
+
+
 
         ##################################################
         # Connections
